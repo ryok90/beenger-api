@@ -1,0 +1,47 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [ develop ]
+
+jobs:
+  build_push:
+    name: Build & Push Docker Image
+    runs-on: ubuntu-latest
+    env: 
+      NODE_ENV: production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1 
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GHCR_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/ryok90/staging-api-beenger:latest
+
+  deploy:
+    needs: build_push
+    name: Deploy to Server
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH to pull image and run
+        uses: appleboy/ssh-action@master
+        with:
+          host: staging-api.beenger.com
+          username: root
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            docker pull ghcr.io/ryok90/staging-api-beenger:latest
+            docker stop staging-api-beenger
+            docker rm staging-api-beenger
+            docker run --name staging-api-beenger --detach -p 3011:3000 ghcr.io/ryok90/staging-api-beenger
+            docker image prune -f
