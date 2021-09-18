@@ -16,7 +16,7 @@ typings/
 .env
 .env.test
 
-.next
+.dist
 
 .vscode/*
 !.vscode/launch.json.example
