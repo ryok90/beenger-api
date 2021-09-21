@@ -40,7 +40,7 @@ jobs:
           username: root
           key: ${{ secrets.SSH_KEY }}
           script: |
-            echo ${{ secrets.ENV_STAGING }} > .env.staging-api-beenger
+            echo "${{ secrets.ENV_STAGING }}" > .env.staging-api-beenger
             docker pull ghcr.io/ryok90/staging-api-beenger:latest
             docker stop staging-api-beenger
             docker rm staging-api-beenger
