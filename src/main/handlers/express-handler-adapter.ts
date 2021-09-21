@@ -8,7 +8,7 @@ export const expressHandlerAdapter = (controller: Controller) => {
       params: req.params,
       query: req.query,
       headers: req.headers,
-      url: req.url,
+      url: req.url
     }
 
     try {
