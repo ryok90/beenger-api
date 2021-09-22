@@ -44,5 +44,5 @@ jobs:
             docker pull ghcr.io/ryok90/staging-api-beenger:latest
             docker stop staging-api-beenger
             docker rm staging-api-beenger
-            docker run --env-file=.env.staging-api-beenger --name staging-api-beenger -d -p 3020:3020 ghcr.io/ryok90/staging-api-beenger
+            docker run --env-file=.env.staging-api-beenger --add-host host.docker.internal:host-gateway --name staging-api-beenger -d ghcr.io/ryok90/staging-api-beenger
             docker image prune -f
