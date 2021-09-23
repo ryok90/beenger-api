@@ -5,7 +5,7 @@ export interface Controller {
 }
 
 export namespace Controller {
-  export type Request<Body = any, Params = any> = {
+  export interface Request<Body = any, Params = any> {
     body: Body
     params: Params
     query: any
