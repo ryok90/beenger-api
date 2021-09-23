@@ -2,7 +2,7 @@ export abstract class HttpError<T extends HttpErrorResponse = HttpErrorResponse>
   readonly response: T
   readonly code: number
 
-  constructor(response: T, code: number, stack?: any) {
+  constructor (response: T, code: number, stack?: any) {
     super()
     this.code = code
     this.response = response
@@ -13,11 +13,11 @@ export abstract class HttpError<T extends HttpErrorResponse = HttpErrorResponse>
   }
 }
 
-export type HttpErrorResponse = {
+export interface HttpErrorResponse {
   message?: string
   errors?: HttpErrors
 }
 
-export type HttpErrors = {
+export interface HttpErrors {
   [name: string]: string[]
 }

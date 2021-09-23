@@ -5,13 +5,14 @@
   "repository": "https://github.com/ryok90/beenger-api",
   "author": "Rodrigo Yokota",
   "scripts": {
-    "build": "rimraf dist && tsc",
+    "build": "rimraf dist && tsc -p tsconfig-build.json",
     "start": "NODE_PATH=./dist node dist/main/server.js",
     "dev": "cross-env NODE_PATH=./src NODE_ENV=dev ts-node-dev --respawn --transpile-only src/main/server.ts",
     "test": "jest --passWithNoTests --runInBand --no-cache",
-    "test:ci": "test --coverage",
+    "test:ci": "jest --coverage",
     "up": "docker-compose up -d",
-    "down": "docker-compose down"
+    "down": "docker-compose down",
+    "lint": "eslint ./src"
   },
   "dependencies": {
     "axios": "^0.21.4",
@@ -36,6 +37,7 @@
     "joi": "^17.4.2",
     "prettier": "^2.4.0",
     "rimraf": "^3.0.2",
+    "ts-jest": "^27.0.5",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.4.3"
   }
