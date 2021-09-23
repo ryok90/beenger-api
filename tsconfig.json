@@ -12,6 +12,6 @@
     "rootDirs": ["src", "tests"],
     "baseUrl": "src",
   },
-  "include": ["src"],
-  "exclude": ["tests"]
+  "include": ["src", "tests"],
+  "exclude": []
 }

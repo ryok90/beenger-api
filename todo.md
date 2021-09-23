@@ -1,0 +1,2 @@
+- Dockerfile --network=host
+- Semantic versioning
